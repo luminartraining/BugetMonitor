@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Add Expenses</h2>
+
+<form action="" method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit">
+
+</form>
+<hr>
+<!--category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    amount=models.IntegerField()
+    date=models.DateField(auto_now=True)
+    note=models.CharField(max_length=120)
+    user=models.CharField(max_length=120)
+-->
+
+<table>
+    <tr>
+        <td>category</td>
+        <td>amount</td>
+        <td>date</td>
+        <td>note</td>
+        <td>Action</td>
+    </tr>
+
+    {%for exp in expenses%}
+    <tr>
+    <td>{{exp.category}}</td>
+    <td>{{exp.amount}}</td>
+    <td>{{exp.date}}</td>
+    <td>{{exp.note}}</td>
+        <td><a href="{%url 'editexpens' exp.id%}">edit</a> </td>
+        <td><a href="{%url 'delete' exp.id%}">delete</a> </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
+</body>
+</html>
